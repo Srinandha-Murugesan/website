@@ -5,40 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Srinandha Murugesan Resume</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         .customfont {
             font-family: "Roboto Condensed", serif;
             font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
-            }
-         html, body {
+        }
+        html, body {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; 
+            overflow: hidden;
         }
         .container {
             display: flex;
-            height: 100%; 
+            height: 100vh;
         }
         .left {
             background-color: #ffefd0;
-            width: 50%; 
+            width: 50%;
             padding: 0px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
             margin-top: 0px;
         }
         .right {
             width: 50%;
             height: 100%;
             position: relative;
-            background-color: #ffefd0;
+            background-color: gray;
         }
         .flip-container {
             width: 100%;
@@ -65,13 +65,16 @@
         }
         .back {
             transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             height: 100%;
-            overflow: hidden; 
+            overflow: auto;
         }
         .back iframe {
             width: 100%;
             height: 100%;
-            border: none;
+            overflow: hidden
         }
         .image-container {
             display: flex;
@@ -83,7 +86,7 @@
             width: 100%;
         }
         .front img {
-            width: 80%; 
+            width: 80%;
             cursor: pointer;
             transition: transform 0.4s;
         }
@@ -92,63 +95,71 @@
         }
         .icon-row {
             display: flex;
-            justify-content: center; 
+            justify-content: center;
             align-items: center;
-            margin-top: 2vw; 
+            margin-top: 2vw;
             gap: 1vw;
         }
         .icon {
-            width: 14vw; 
-            height: 14vw; 
+            width: 14vw;
+            height: 14vw;
             cursor: pointer;
-            transition: transform 0.2s; 
+            transition: transform 0.2s;
         }
         .icon:hover {
             transform: scale(1.1);
         }
-
         .email-icon {
-            transform: scale(1.17); 
+            transform: scale(1.17);
             margin-left: 1.3vw;
             margin-right: 1vw;
         }
-
         .email-icon:hover {
             transform: scale(1.3);
         }
         .icon-row a {
-        justify-content: center; 
-        align-items: center;
-        text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
         }
+        @media (max-aspect-ratio: 1/1) {
+            .container {
+                flex-direction: column;
+            }
+            .left, .right {
+                width: 100%;
+                height: 50%;
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="left">
-            <p class = "customfont" style = "margin:0px; font-size: 11vw;">Srinandha</p>
-            <p class = "customfont" style="margin:0px; font-size: 11vw;">Murugesan</p>
+            <p class="customfont" style="margin:0px; font-size: 11vw;">Srinandha</p>
+            <p class="customfont" style="margin:0px; font-size: 11vw;">Murugesan</p>
             <div class="icon-row">
                 <a href="http://linkedin.com/in/srinandham" target="_blank" rel="noopener noreferrer">
                     <img class="icon" src="site/LinkedIn_icon.png" alt="LinkedIn">
                 </a>
                 <a href="https://github.com/Srinandha-Murugesan" target="_blank" rel="noopener noreferrer">
-                    <img class="icon" src="site/g_icon.png" alt="GitHub">
+                    <img class="icon" src="site/g_icon.png" alt="Github">
                 </a>
                 <a href="mailto:srinandhamurugesan@gmail.com" target="_blank" rel="noopener noreferrer">
                     <img class="icon email-icon" src="site/Email_icon.png" alt="Email">
                 </a>
-            </div>            
+            </div>
         </div>
         <div class="right">
             <div class="flip-container" id="flip-container">
                 <div class="front">
                     <div class="image-container" onclick="flipResume()">
-                        <img src="site/cv.png" alt="Resume">
+                        <img src="site/cv.png" alt="Click for Resume">
                     </div>
                 </div>
                 <div class="back">
-                    <iframe id="resume-iframe" src="site/Srinandha Murugesan Resume.pdf"></iframe>
+                    <iframe id="resume-iframe" src="site/resume.html"></iframe>
                 </div>
             </div>
         </div>
@@ -156,16 +167,17 @@
     <script>
         function flipResume() {
             document.getElementById('flip-container').classList.toggle('flip');
-            setTimeout(function() {
-                const iframe = document.querySelector('.back iframe');
-                iframe.style.height = window.innerHeight + 'px';
-                document.querySelector('.back').style.overflow = 'auto';
-            }, 1000);
+            setTimeout(adjustIframeHeight, 1000);
         }
-        window.addEventListener("resize", function() {
-            const iframe = document.querySelector('.back iframe');
-            iframe.style.height = window.innerHeight + 'px';
-        });
+
+        function adjustIframeHeight() {
+            const iframe = document.querySelector('#resume-iframe');
+            const containerHeight = document.querySelector('.right').offsetHeight;
+            iframe.style.height = containerHeight + "px";
+        }
+
+        window.addEventListener('resize', adjustIframeHeight);
+        document.addEventListener('DOMContentLoaded', adjustIframeHeight);
     </script>
 </body>
 </html>
