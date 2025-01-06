@@ -154,10 +154,12 @@
             }
             .right {
                 width: 100vw;
-                height: 70vh;
+                height: calc(70vh - env(safe-area-inset-bottom));
             }
             .front img {
                 width: 50vw;
+                justify-content: center;
+                align-items: center;
             }
             .icon-row {
                 gap: 2.1vw;
