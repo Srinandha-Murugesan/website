@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Srinandha Murugesan Resume</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +19,11 @@
             padding: 0;
             height: 100vh;
             overflow: hidden;
+            padding-bottom: env(safe-area-inset-bottom);
         }
         .container {
             display: flex;
-            height: 100vh;
+            height: calc(100vh - env(safe-area-inset-bottom));
         }
         .left {
             position: relative;
@@ -52,6 +53,7 @@
             height: 100vh;
             position: relative;
             background-color: gray;
+            height: calc(100vh - env(safe-area-inset-bottom));
         }
         .flip-container {
             width: 100%;
