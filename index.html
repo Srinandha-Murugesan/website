@@ -179,6 +179,14 @@
                 opacity: 1;
             }
         }
+        @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
         @media (max-aspect-ratio: 1/1) {
             .container {
                 flex-direction: column;
@@ -201,13 +209,9 @@
             .icon-row {
                 gap: 2.1vw;
             }
-            .cv-icon {
-                animation: slideInFromTop 1s ease-out forwards;
-                position: relative;
-            }
         @media (max-aspect-ratio: 1/1) {
             .front {
-                animation: slideInFromTop 1s ease-out forwards;
+                animation: fadeIn 1s ease-out forwards;
             }
         }
         }
@@ -258,7 +262,28 @@
             const containerHeight = document.querySelector('.right').offsetHeight;
             iframe.style.height = containerHeight + "px";
         }
+        window.addEventListener('resize', () => {
+            resetAnimations();
+        });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            resetAnimations();
+        });
+
+        function resetAnimations() {
+            const textElements = document.querySelectorAll('.animated-text');
+            const iconRow = document.querySelector('.icon-row');
+
+            textElements.forEach(element => {
+                element.style.animation = 'none';
+                element.offsetHeight;  
+                element.style.animation = '';  
+            });
+
+            iconRow.style.animation = 'none';
+            iconRow.offsetHeight;  
+            iconRow.style.animation = '';  
+        }
         window.addEventListener('resize', adjustIframeHeight);
         document.addEventListener('DOMContentLoaded', adjustIframeHeight);
     </script>
